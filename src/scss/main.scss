@@ -211,7 +211,8 @@ main {
     img {
       width: 100%;
       height: 200px;
-      border-top-radius: 10px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
   } 
 
@@ -255,14 +256,111 @@ main {
 } 
 
 section {
-  background-color: whitesmoke;
-  height: 100vh;
+  background: whitesmoke;
+  padding: 4rem;
+  display: grid;
+  place-items: center;
+  
   .terms-header {
+    font-size: 2rem;
+    margin: 1rem 0 4rem;
     text-align: center;
   }
-  .terms-container {
-    max-width: 960px;
-    margin: 0 auto;
+  
+  .terms {
+    background-color: white;
+    width: 400px;
+    height: 300px;
+    overflow: auto;
+    padding: 2rem 2rem 1rem;
+    max-width: 1200px;
+    font-size: 1.3rem;
+    line-height: 1.2;
+
+    h2 {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+    
+    p {
+      margin: 1rem 0;
+    }
+    em {
+      font-style: italic;
+    }
+    ul {
+      margin-left: 2rem;
+      list-style: disc;
+      li {
+        margin: .5rem 0;
+      }
+    }
+  }
+}
+
+.terms-container {
+  display: grid;
+  width: 400px;
+  margin: auto;
+  box-shadow: 1px 4px 5px rgba(black, .1);
+  
+  .btn-container {
+    background: #fff;
+    box-shadow: 0px -2px 5px rgba(black, .1);
+    position: relative;
+    padding: 1rem 1.5rem;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    
+    .btn-accept {
+      all: unset;
+      width: 60%;
+      display: inline-block;
+      text-align: center;
+      background-color: white;
+      padding: 1rem 1.5rem;
+      transition: all 250ms ease-in-out;
+      opacity: .6;
+    
+      &.enabled {
+        cursor: pointer;
+        opacity: 1;
+        background-color: #1a1d28;
+        color: white;
+        
+        &:focus {
+          outline: 2px solid dodgerblue;
+        }
+      }
+    }
+
+    .btn-message {
+      position: absolute;
+      background-color: #9d2f2f;
+      color: white;
+      padding: 1rem 1.5rem;
+      top: -45px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 250ms ease-in-out;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -15px;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 15px solid #9d2f2f;
+        transform: translateX(-50%);
+      }
+      
+      &.visible{
+        top: -65px;
+        opacity: 1;
+      }
+    }
   }
 }
 

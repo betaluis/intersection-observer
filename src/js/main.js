@@ -26,7 +26,6 @@ const cardObserverCallback = (cards, cardObserver) => {
     if (card.isIntersecting) {
       card.target.classList.add('fade');
       cardObserver.unobserve(card.target);
-      console.log(card);
     }
   })
 }
@@ -36,3 +35,39 @@ const cardObserver = new IntersectionObserver(cardObserverCallback, { threshold:
 cards.forEach(card => {
   cardObserver.observe(card);
 })
+
+
+// ================================
+//      Terms and condition
+// ================================
+
+const lastTerm = document.querySelector('.terms p:last-child');
+const acceptButton = document.querySelector('.btn-accept');
+
+const termsObserverCallback = (entries, termsObserver) => {
+  entries.forEach(entry => {
+    if ( entry.isIntersecting ) {
+      acceptButton.classList.add('enabled');
+      termsObserver.unobserve(lastTerm);
+      acceptButton.focus();
+      console.log(entry)
+    }
+  }) 
+}
+
+const termsObserverOptions = { threshold: 1 }
+
+const termsObserver = new IntersectionObserver(termsObserverCallback, termsObserverOptions);
+
+termsObserver.observe(lastTerm);
+
+acceptButton.addEventListener('click', e => {
+  e.preventDefault();
+  if (!e.target.classList.contains('enabled')) {
+    const messageButton = document.querySelector('.btn-message')
+    messageButton.classList.add('visible');
+    setTimeout(() => messageButton.classList.remove('visible'), '2000');
+  }
+}) 
+
+
